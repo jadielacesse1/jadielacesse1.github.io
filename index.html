@@ -3,82 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Página de Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-image: url('sua-imagem-de-fundo.jpg');
+            background-size: cover;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f4f4f4;
         }
-        .container {
-            text-align: center;
-            background-color: #fff;
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .logo {
+
+        .login-container h1 {
             margin-bottom: 20px;
         }
-        .logo img {
-            max-width: 150px;
-            height: auto;
-        }
-        input[type="text"], input[type="password"] {
+
+        .login-container input {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
         }
-        input[type="button"] {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
+
+        .login-container button {
+            width: 100%;
             padding: 10px;
-            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
         }
-        input[type="button"]:hover {
+
+        .login-container button:hover {
             background-color: #0056b3;
         }
-        .message {
+
+        .dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: white;
+            border: 2px solid;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .dialog.error {
+            border-color: red;
             color: red;
-            margin-top: 10px;
+        }
+
+        .dialog.success {
+            border-color: green;
+            color: green;
+        }
+
+        .dialog button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <img src="logo.png" alt="Logo">
-        </div>
-        <form id="loginForm">
-            <input type="text" id="username" placeholder="Nome de Usuário">
-            <input type="password" id="password" placeholder="Senha">
-            <input type="button" value="Conectar" onclick="login()">
-            <div id="message" class="message"></div>
-        </form>
+    <div class="login-container">
+        <h1>Login</h1>
+        <input type="text" id="username" placeholder="Usuário" />
+        <input type="password" id="password" placeholder="Senha" />
+        <button onclick="login()">Entrar</button>
+    </div>
+
+    <div id="error-dialog" class="dialog error">
+        <p>Acesso Negado</p>
+        <p>&#10006;</p>
+    </div>
+
+    <div id="success-dialog" class="dialog success">
+        <p>Acesso Permitido</p>
+        <button onclick="goToNextPage()">Continuar</button>
     </div>
 
     <script>
         function login() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const message = document.getElementById('message');
 
             if (username === 'JADIEL' && password === '2024') {
-                message.style.color = 'green';
-                message.textContent = 'Login bem-sucedido!';
+                document.getElementById('success-dialog').style.display = 'block';
             } else {
-                message.style.color = 'red';
-                message.textContent = 'Usuário ou senha incorretos.';
+                document.getElementById('error-dialog').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('error-dialog').style.display = 'none';
+                }, 2000);
             }
+        }
+
+        function goToNextPage() {
+            window.location.href = 'outra-pagina.html';
         }
     </script>
 </body>
