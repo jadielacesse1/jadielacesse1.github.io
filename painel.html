@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa de Botões</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('sua-imagem-de-fundo.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .search-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .search-container input {
+            width: calc(100% - 50px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: -4px;
+        }
+
+        .search-container button {
+            padding: 10px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .search-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .search-results {
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 400px;
+            display: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-container">
+        <h1>Pesquisar Butões no Site</h1>
+        <input type="text" id="searchQuery" placeholder="Digite o texto do butão..." />
+        <button onclick="search()">Pesquisar</button>
+    </div>
+
+    <div id="searchResults" class="search-results">
+        <h2>Resultados da Pesquisa:</h2>
+        <div id="resultsContainer"></div>
+    </div>
+
+    <!-- Exemplos de botões no site -->
+    <button class="hidden" id="btn1">Primeiro Butão</button>
+    <button class="hidden" id="btn2">Segundo Butão</button>
+    <button class="hidden" id="btn3">Outro Butão</button>
+
+    <script>
+        function search() {
+            const query = document.getElementById('searchQuery').value.toLowerCase();
+            const buttons = document.querySelectorAll('button.hidden');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const searchResults = document.getElementById('searchResults');
+
+            resultsContainer.innerHTML = '';
+            let found = false;
+
+            buttons.forEach(button => {
+                if (button.textContent.toLowerCase().includes(query)) {
+                    const p = document.createElement('p');
+                    p.textContent = button.textContent;
+                    resultsContainer.appendChild(p);
+                    found = true;
+                }
+            });
+
+            if (found) {
+                searchResults.style.display = 'block';
+            } else {
+                searchResults.style.display = 'none';
+                alert('Nenhum butão encontrado');
+            }
+        }
+    </script>
+
+</body>
+</html>
