@@ -3,110 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesquisa de Botões</title>
+    <title>PagBank - Seu Banco Digital</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('https://raw.githubusercontent.com/jadielacesse1/jadielacesse1.github.io/main/wallpaper.jpeg');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
+            background-color: #f4f4f4;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            padding: 0;
         }
 
-        .search-container {
-            background-color: rgba(255, 255, 255, 0.8);
+        .navbar {
+            background-color: #00bfa5;
+            padding: 15px;
+            color: white;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            margin-top: 80px;
             padding: 20px;
+        }
+
+        .login-box, .service-box {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 400px;
+            width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-box h2, .service-box h2 {
+            margin-bottom: 20px;
+            color: #00bfa5;
+        }
+
+        .login-box input[type="text"], 
+        .login-box input[type="password"],
+        .service-box input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-box button, .service-box button {
+            background-color: #00bfa5;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .login-box button:hover, .service-box button:hover {
+            background-color: #00997e;
+        }
+
+        .login-box p, .service-box p {
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .login-box p a, .service-box p a {
+            color: #00bfa5;
+            text-decoration: none;
+        }
+
+        .login-box p a:hover, .service-box p a:hover {
+            text-decoration: underline;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 300px;
+            margin-bottom: 20px;
             text-align: center;
         }
 
-        .search-container input {
-            width: calc(100% - 50px);
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: -4px;
+        .card h3 {
+            margin-bottom: 10px;
+            color: #00bfa5;
         }
 
-        .search-container button {
-            padding: 10px;
-            border: none;
-            background-color: #007BFF;
+        .card p {
+            color: #555;
+        }
+
+        .footer {
+            background-color: #00bfa5;
             color: white;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-        }
-
-        .search-container button:hover {
-            background-color: #0056b3;
-        }
-
-        .search-results {
-            margin-top: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 400px;
-            display: none;
-        }
-
-        .hidden {
-            display: none;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            z-index: 1000;
         }
     </style>
 </head>
 <body>
 
-    <div class="search-container">
-        <h1>Pesquisar Butões no Site</h1>
-        <input type="text" id="searchQuery" placeholder="Digite o texto do butão..." />
-        <button onclick="search()">Pesquisar</button>
+    <div class="navbar">
+        PagBank
     </div>
 
-    <div id="searchResults" class="search-results">
-        <h2>💭RESULTADO DA SUA PESQUISA💭</h2>
-        <div id="resultsContainer"></div>
+    <div class="container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <input type="text" placeholder="Digite seu CPF ou Email" required>
+            <input type="password" placeholder="Digite sua senha" required>
+            <button>Entrar</button>
+            <p><a href="#">Esqueci minha senha</a></p>
+            <p><a href="#">Cadastrar-se</a></p>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Saldo</h3>
+                <p>Consulte o saldo da sua conta PagBank.</p>
+                <button onclick="viewBalance()">Ver Saldo</button>
+            </div>
+            <div class="card">
+                <h3>Transferências</h3>
+                <p>Transfira dinheiro para outras contas bancárias.</p>
+            </div>
+            <div class="card">
+                <h3>Recarga de Celular</h3>
+                <p>Recarregue o seu celular com facilidade.</p>
+            </div>
+            <div class="card">
+                <h3>Cartões</h3>
+                <p>Gerencie seus cartões PagBank.</p>
+            </div>
+        </div>
+
+        <div class="service-box">
+            <h2>Fazer Pagamento no Pix</h2>
+            <input type="text" placeholder="Digite a chave Pix" required>
+            <input type="text" placeholder="Digite o valor" required>
+            <button onclick="makePixPayment()">Pagar</button>
+        </div>
     </div>
 
-    <!-- Exemplos de botões no site -->
-    <button class="hidden" id="btn1">APK</button>
-    <button class="hidden" id="btn2">PDF</button>
-    <button class="hidden" id="btn3">BANCO</button>
+    <div class="footer">
+        &copy; 2024 PagBank - Todos os direitos reservados.
+    </div>
 
     <script>
-        function search() {
-            const query = document.getElementById('searchQuery').value.toLowerCase();
-            const buttons = document.querySelectorAll('button.hidden');
-            const resultsContainer = document.getElementById('resultsContainer');
-            const searchResults = document.getElementById('searchResults');
+        function viewBalance() {
+            alert("Seu saldo é R$ 1.234,56."); // Simulação, substituir com lógica real
+        }
 
-            resultsContainer.innerHTML = '';
-            let found = false;
-
-            buttons.forEach(button => {
-                if (button.textContent.toLowerCase().includes(query)) {
-                    const p = document.createElement('p');
-                    p.textContent = button.textContent;
-                    resultsContainer.appendChild(p);
-                    found = true;
-                }
-            });
-
-            if (found) {
-                searchResults.style.display = 'block';
+        function makePixPayment() {
+            const chavePix = document.querySelector('.service-box input[type="text"]').value;
+            const valor = document.querySelectorAll('.service-box input[type="text"]')[1].value;
+            if (chavePix && valor) {
+                alert(`Pagamento de R$ ${valor} realizado com sucesso para a chave Pix ${chavePix}.`); // Simulação
             } else {
-                searchResults.style.display = 'none';
-                alert('🚫NENHUM ARQUIVO ENCONTRADO OU APLICATIVO🚫');
+                alert("Por favor, preencha todos os campos.");
             }
         }
     </script>
