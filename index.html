@@ -56,16 +56,16 @@
             width: 100%;
         }
         .buttons-container button {
-            padding: 10px;
-            background-color: #004d00;
-            color: #ffffff;
+            padding: 15px; /* Aumenta o padding */
+            background-color: #00cc00; /* Cor verde */
+            color: #ffffff; /* Texto branco */
             border: none;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px; /* Aumenta o tamanho da fonte */
             border-radius: 5px;
         }
         .buttons-container button:hover {
-            background-color: #006400;
+            background-color: #009900; /* Cor verde mais escura ao passar o mouse */
         }
         .input-group {
             margin-bottom: 10px;
@@ -78,11 +78,6 @@
             border: 1px solid #cccccc;
             border-radius: 5px;
             font-size: 16px;
-        }
-        #login-button {
-            background-color: #00cc00; /* Cor verde */
-            color: #ffffff; /* Texto branco */
-            width: 100%; /* Alarga o botão */
         }
     </style>
 </head>
@@ -99,7 +94,7 @@
         <button id="login-button">Entrar</button>
     </div>
     <div id="buttons-container" class="buttons-container" style="display: none;">
-        <!-- Botões aparecerão após o login correto -->
+        <button id="open-file-link-button">Abrir Arquivo em Nova Aba</button>
     </div>
 </div>
 
@@ -110,6 +105,7 @@
         const inputContainer = document.getElementById('input-container');
         const buttonsContainer = document.getElementById('buttons-container');
         const loginButton = document.getElementById('login-button');
+        const openFileLinkButton = document.getElementById('open-file-link-button');
         
         let currentIndex = 0;
 
@@ -130,8 +126,9 @@
             if (username === 'JADIEL' && password === '2024') {
                 chatBotTextElement.textContent = "Credenciais corretas! Clique no botão abaixo para acessar o conteúdo.";
                 buttonsContainer.style.display = 'flex';
-                // Adiciona o botão "Abrir Arquivo" ao container
-                buttonsContainer.innerHTML = '<button onclick="openFile()">Abrir Arquivo</button>';
+                openFileLinkButton.addEventListener('click', function() {
+                    window.open('painel.html', '_blank'); // Abre o arquivo painel.html em uma nova aba
+                });
             } else {
                 chatBotTextElement.textContent = "Usuário e/ou senha incorretos. Tente novamente.";
                 setTimeout(() => {
@@ -141,13 +138,9 @@
             }
         }
 
-        function openFile() {
-            window.open('painel.html', '_blank'); // Abre o arquivo painel.html
-        }
+        setTimeout(typeMessage, 1000);
 
         loginButton.addEventListener('click', validateCredentials);
-
-        setTimeout(typeMessage, 1000);
     });
 </script>
 
