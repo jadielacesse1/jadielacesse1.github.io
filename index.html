@@ -57,7 +57,7 @@
         }
         .buttons-container button {
             padding: 10px;
-            background-color: #00D205;
+            background-color: #004d00;
             color: #ffffff;
             border: none;
             cursor: pointer;
@@ -71,13 +71,18 @@
             margin-bottom: 10px;
             display: flex;
             flex-direction: column;
-            width: 200%;
+            width: 100%;
         }
         .input-group input {
             padding: 10px;
             border: 1px solid #cccccc;
             border-radius: 5px;
             font-size: 16px;
+        }
+        #login-button {
+            background-color: #00cc00; /* Cor verde */
+            color: #ffffff; /* Texto branco */
+            width: 100%; /* Alarga o botão */
         }
     </style>
 </head>
@@ -137,7 +142,7 @@
         }
 
         function openFile() {
-            window.open('painel.html',); // Substitua 'seu-arquivo.html' pelo caminho do arquivo que deseja abrir
+            window.open('painel.html', '_blank'); // Abre o arquivo painel.html
         }
 
         loginButton.addEventListener('click', validateCredentials);
