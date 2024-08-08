@@ -21,37 +21,42 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             display: flex;
+            flex-direction: column;
             align-items: flex-start;
+            max-height: 500px;
+            overflow-y: auto;
         }
-        .bot-icon {
-            width: 40px;
-            height: 40px;
-            background-color: #008000;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #ffffff;
-            font-size: 24px;
-            margin-right: 10px;
-        }
-        .chat-bot {
+        .bot-message {
             background-color: #008000;
             color: #ffffff;
             padding: 10px;
             border-radius: 10px;
             text-align: left;
             word-wrap: break-word;
-            flex: 1;
-            min-height: 40px;
+            margin-bottom: 10px;
+            max-width: 80%;
+            align-self: flex-start;
             display: flex;
             align-items: center;
+        }
+        .bot-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            background-color: #ffffff;
+            color: #008000;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
         }
         .typing-indicator {
             width: 30px;
             height: 10px;
             display: flex;
             justify-content: space-between;
+            margin-left: 32px;
         }
         .typing-indicator div {
             width: 6px;
@@ -78,39 +83,67 @@
 </head>
 <body>
 
-<div class="chat-container">
-    <div class="bot-icon">🤖</div>
-    <div id="chat-bot" class="chat-bot">
-        <div class="typing-indicator">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
+<div class="chat-container" id="chat-container">
+    <!-- Mensagens do bot serão inseridas aqui -->
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const botMessage = "OLÁ EU SOU ASSISTENTE ARTIFICIAL DO JADIEL ACESSE VIR FALAR UM POUCO SOBRE O SITE JADIEL ACESSE.";
-        const botMessage = "ESSE SITE FOI CRIADO POR JADIEL ACESSE ONDE ELE VAI PODER USAR DA MANEIRA QUE ELE QUER ESSE SITE SÓ PODE TER ACESSO QUEM TEM O USUÁRIO E SENHA.";
-        const botMessage = "I É ISSO OBRIGADO PELA A SUA ATENÇÃO";
-        const chatBotElement = document.getElementById('chat-bot');
-        const typingIndicator = document.querySelector('.typing-indicator');
+        const messages = [
+            "OLÁ EU SOU ASSISTENTE ARTIFICIAL DO JADIEL ACESSE VIR FALAR UM POUCO SOBRE O SITE JADIEL ACESSE.",
+            "ESSE SITE FOI CRIADO POR JADIEL ACESSE ONDE ELE VAI PODER USAR DA MANEIRA QUE ELE QUER ESSE SITE SÓ PODE TER ACESSO QUEM TEM O USUÁRIO E SENHA.",
+            "I É ISSO OBRIGADO PELA A SUA ATENÇÃO"
+        ];
 
-        // Simula um efeito de digitação, letra por letra
-        let currentIndex = 0;
+        const chatContainer = document.getElementById('chat-container');
 
-        function typeMessage() {
-            if (currentIndex < botMessage.length) {
-                typingIndicator.style.display = 'none';
-                chatBotElement.textContent += botMessage[currentIndex];
-                currentIndex++;
-                setTimeout(typeMessage, 50); // Ajuste a velocidade de digitação aqui
+        function createBotMessageElement(text) {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'bot-message';
+
+            const botIcon = document.createElement('div');
+            botIcon.className = 'bot-icon';
+            botIcon.textContent = '🤖';
+
+            const textNode = document.createTextNode(text);
+
+            messageElement.appendChild(botIcon);
+            messageElement.appendChild(textNode);
+
+            return messageElement;
+        }
+
+        function showTypingIndicator() {
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'typing-indicator';
+            typingIndicator.innerHTML = `
+                <div></div>
+                <div></div>
+                <div></div>
+            `;
+            chatContainer.appendChild(typingIndicator);
+            return typingIndicator;
+        }
+
+        function removeTypingIndicator(typingIndicator) {
+            chatContainer.removeChild(typingIndicator);
+        }
+
+        function displayMessages(index) {
+            if (index < messages.length) {
+                const typingIndicator = showTypingIndicator();
+
+                setTimeout(() => {
+                    removeTypingIndicator(typingIndicator);
+                    const messageElement = createBotMessageElement(messages[index]);
+                    chatContainer.appendChild(messageElement);
+                    chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll para a última mensagem
+                    displayMessages(index + 1);
+                }, 2000); // Intervalo de tempo antes de exibir cada mensagem
             }
         }
 
-        // Simula um atraso antes de começar a digitar
-        setTimeout(typeMessage, 2000);
+        displayMessages(0); // Inicia o ciclo de mensagens
     });
 </script>
 
