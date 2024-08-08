@@ -12,10 +12,14 @@
             background-position: center; /* Centraliza a imagem */
             background-repeat: no-repeat; /* Evita a repetição da imagem */
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+        }
+        .logo {
+            margin-bottom: 20px; /* Espaço entre a logo e o chat */
         }
         .chat-container {
             width: 400px;
@@ -110,6 +114,8 @@
     </style>
 </head>
 <body>
+
+<img src="https://raw.githubusercontent.com/jadielacesse1/jadielacesse1.github.io/main/logo.png" alt="Logo" class="logo">
 
 <div class="chat-container">
     <div id="bot-message" class="bot-message">
