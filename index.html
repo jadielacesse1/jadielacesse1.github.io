@@ -12,10 +12,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #000;
-            color: white;
-            font-family: Arial, sans-serif;
             overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: white;
         }
 
         #bg-video {
@@ -25,7 +24,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -1;
+            z-index: -1; /* Vídeo deve ficar atrás dos outros elementos */
         }
 
         #welcome-message, #login-container {
@@ -33,6 +32,8 @@
             background-color: rgba(0, 0, 0, 0.5); /* Caixa de fundo transparente */
             padding: 20px;
             border-radius: 10px;
+            position: relative;
+            z-index: 1; /* Garantir que o conteúdo fique sobre o vídeo */
         }
 
         .input-field {
