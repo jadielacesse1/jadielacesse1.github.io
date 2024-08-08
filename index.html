@@ -7,16 +7,19 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('https://raw.githubusercontent.com/jadielacesse1/jadielacesse1.github.io/main/jadielacesse2.png'); /* Link para a imagem de fundo */
-            background-size: cover; /* Faz a imagem cobrir toda a tela */
-            background-position: center; /* Centraliza a imagem */
-            background-repeat: no-repeat; /* Evita a repetição da imagem */
+            background-image: url('https://raw.githubusercontent.com/jadielacesse1/jadielacesse1.github.io/main/jadielacesse2.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             display: flex;
+            flex-direction: column; /* Adicionado para organizar a logo e o chat container */
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            flex-direction: column; /* Adicionado para permitir a logo acima do chat */
+        }
+        .logo {
+            margin-bottom: 20px; /* Espaçamento entre a logo e o chat */
         }
         .chat-container {
             width: 400px;
@@ -61,17 +64,17 @@
             width: 100%;
         }
         .buttons-container button {
-            padding: 15px; 
-            background-color: #004d00; /* Cor verde escuro */
-            color: #ffffff; 
+            padding: 15px;
+            background-color: #004d00;
+            color: #ffffff;
             border: none;
             cursor: pointer;
-            font-size: 18px; 
+            font-size: 18px;
             border-radius: 5px;
             text-align: center;
         }
         .buttons-container button:hover {
-            background-color: #003300; /* Cor verde ainda mais escuro ao passar o mouse */
+            background-color: #003300;
         }
         .input-group {
             margin-bottom: 10px;
@@ -81,35 +84,32 @@
         }
         .input-group input {
             padding: 10px;
-            border: 1px solid #004d00; /* Borda verde escuro */
+            border: 1px solid #004d00;
             border-radius: 5px;
             font-size: 16px;
-            background-color: #003300; /* Cor de fundo dos campos em verde escuro */
-            color: #ffffff; /* Cor do texto */
+            background-color: #003300;
+            color: #ffffff;
         }
         .input-group input::placeholder {
-            color: #cccccc; /* Cor do placeholder */
+            color: #cccccc;
         }
         .input-group button {
             padding: 10px;
-            background-color: #004d00; /* Cor do botão em verde escuro */
-            color: #ffffff; /* Cor do texto do botão */
+            background-color: #004d00;
+            color: #ffffff;
             border: none;
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
         }
         .input-group button:hover {
-            background-color: #003300; /* Cor do botão ao passar o mouse, em verde ainda mais escuro */
+            background-color: #003300;
         }
         .error-image {
             display: none;
             width: 100%;
             margin-top: 20px;
             border-radius: 10px;
-        }
-        .logo {
-            margin-bottom: 20px;
         }
     </style>
 </head>
