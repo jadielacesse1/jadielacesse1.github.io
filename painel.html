@@ -3,114 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jadiel Acesse</title>
+    <title>Site com Imagem de Fundo e Menu</title>
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #008000;
-            color: #FFFFFF;
-        }
-        .container {
-            display: flex;
-        }
-        .sidebar {
-            width: 250px;
-            height: 100vh;
-            background-color: #004d00;
-            padding: 20px;
-            box-sizing: border-box;
-            position: fixed;
-        }
-        .content {
-            margin-left: 250px;
-            padding: 20px;
-            flex: 1;
-            box-sizing: border-box;
-        }
-        .logo {
+            background-image: url('sua-imagem-de-fundo.jpg');
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
+            height: 100vh;
+            color: white;
         }
-        .logo img {
-            width: 200px;
-            height: 100px;
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
         }
+
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .marquee p {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 10s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
         .buttons {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
-        .buttons button {
+
+        .buttons a {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
             padding: 10px 20px;
-            background-color: #FFFFFF;
-            color: #008000;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
+            margin: 5px;
+            text-decoration: none;
             border-radius: 5px;
-            margin-bottom: 10px;
         }
-        .buttons button:hover {
-            background-color: #004d00;
-            color: #FFFFFF;
+
+        .text-box {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            color: black;
         }
-        .menu {
-            list-style-type: none;
+
+        #menu-icon {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 50%;
+            color: white;
+        }
+
+        #menu {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+        }
+
+        #menu ul {
+            list-style: none;
             padding: 0;
         }
-        .menu li {
-            margin-bottom: 15px;
+
+        #menu ul li {
+            margin: 20px 0;
         }
-        .menu li a {
+
+        #menu ul li a {
+            color: white;
             text-decoration: none;
-            color: #FFFFFF;
-            font-size: 18px;
         }
-        .menu li a:hover {
-            color: #00cc00;
-        }
-        .section {
-            margin-bottom: 50px;
+
+        #menu ul li a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <ul class="menu">
-                <li><a href="#">Início</a></li>
-                <li><a href="sobre.html">Sobre Nós</a></li>
-                <li><a href="#">Contato</a></li>
-            </ul>
-        </div>
-        <div class="content">
-            <div class="logo">
-                <img src="https://raw.githubusercontent.com/jadielacesse1/jadielacesse1.github.io/main/20240807_223326.png" alt="Logo">
-            </div>
-            <div class="buttons">
-                <button onclick="openFile('arquivo1.pdf')">Botão 1</button>
-                <button onclick="openFile('arquivo2.pdf')">Botão 2</button>
-                <button onclick="openFile('arquivo3.pdf')">Botão 3</button>
-            </div>
-            <div class="section">
-                <h1>Bem-vindo ao Jadiel Acesse</h1>
-                <p>Ola esse site trabalha 24 horas ativo e um site onde foi criado por jadiel acesse para ser usado da maneira que ele queira esse site,ele pode a qualquer momento ser mudado as informações</p>
-            </div>
-            <div class="section">
-                <h2>Outra seção importante</h2>
-                <p>se você conseguil acessar esse site e porque você tem o contato de Jadiel caso você acessou esse site e aceitou o nome de usuário e senha, e teve acesso sem a permissão de Jadiel iremos mudar o acesso para outro acesso</p>
-            </div>
-        </div>
+
+<div id="menu-icon">☰</div>
+
+<div id="menu">
+    <ul>
+        <li><a href="#sobre">Sobre o Site</a></li>
+        <li><a href="#config">Configuração</a></li>
+        <li><a href="#enviar">Enviar Mensagem</a></li>
+    </ul>
+</div>
+
+<div class="container">
+    <div class="marquee">
+        <p>Este é um texto que passa automaticamente...</p>
     </div>
 
-    <script>
-        function openFile(fileName) {
-            window.open(fileName, '_blank');
+    <div class="buttons">
+        <a href="#link1">Link 1</a>
+        <a href="#link2">Link 2</a>
+        <a href="#link3">Link 3</a>
+    </div>
+
+    <div class="text-box">
+        <p>Este é um texto dentro de uma caixa abaixo dos botões.</p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('menu-icon').onclick = function() {
+        var menu = document.getElementById('menu');
+        if (menu.style.display === 'block') {
+            menu.style.display = 'none';
+        } else {
+            menu.style.display = 'block';
         }
-    </script>
+    }
+</script>
+
 </body>
 </html>
