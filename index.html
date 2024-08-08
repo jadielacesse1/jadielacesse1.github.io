@@ -3,124 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Login</title>
+    <title>Bot de Boas-Vindas</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('https://raw.githubusercontent.com/jadielacesse1/jadielacesse1.github.io/main/Cartazes%20Religiosos.jpeg');
-            background-size: cover;
+            background-color: #008000; /* Fundo verde */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
-
-        .login-container {
-            background-color: rgba(255, 255, 255, 0.8);
+        .chat-container {
+            width: 400px;
+            background-color: #ffffff;
             padding: 20px;
-            border-radius: 10px;
-            text-align: center;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-container h1 {
-            margin-bottom: 20px;
-        }
-
-        .login-container input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .login-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .login-container button:hover {
-            background-color: #0056b3;
-        }
-
-        .dialog {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: white;
-            border: 2px solid;
             border-radius: 10px;
-            text-align: center;
-            display: none;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
-
-        .dialog.error {
-            border-color: red;
-            color: red;
-        }
-
-        .dialog.success {
-            border-color: green;
-            color: green;
-        }
-
-        .dialog button {
-            margin-top: 20px;
+        .bot-message {
+            background-color: #004d00;
+            color: #ffffff;
             padding: 10px;
-            background-color: #007BFF;
-            color: white;
+            border-radius: 10px;
+            text-align: left;
+            word-wrap: break-word;
+            margin-bottom: 10px;
+            max-width: 100%;
+            align-self: flex-start;
+            display: flex;
+            align-items: center;
+        }
+        .bot-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            background-color: #ffffff;
+            color: #004d00;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+        .buttons-container button {
+            padding: 10px;
+            background-color: #004d00;
+            color: #ffffff;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .buttons-container button:hover {
+            background-color: #006400;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h1>OLÁ PRA VOCÊ ENTRAR NO SITE JADIEL ACESSE COLOQUE AS INFORMAÇÕES CORRETA</h1>
-        <h1>INDIOMA:🇧🇷</h1>
-        <input type="text" id="username" placeholder="Usuário" />
-        <input type="password" id="password" placeholder="Senha" />
-        <button onclick="login()">Entrar</button>
+
+<div class="chat-container">
+    <div class="bot-message">
+        <div class="bot-icon">🤖</div>
+        <div id="chat-bot-text">...</div>
     </div>
-
-    <div id="error-dialog" class="dialog error">
-        <p>Acesso Negado</p>
-        <p>&#10006;</p>
+    <div id="buttons-container" class="buttons-container" style="display: none;">
+        <button>Usuário</button>
+        <button>Senha</button>
+        <button>Entrar</button>
     </div>
+</div>
 
-    <div id="success-dialog" class="dialog success">
-        <p>Acesso Permitido</p>
-        <button onclick="goToNextPage()">Continuar</button>
-    </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const botMessage = "Olá, seja bem-vindo ao site Jadiel Acesse! Para ter acesso, basta adicionar as informações corretas abaixo.";
+        const chatBotTextElement = document.getElementById('chat-bot-text');
+        const buttonsContainer = document.getElementById('buttons-container');
 
-    <script>
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+        let currentIndex = 0;
 
-            if (username === 'JADIEL' && password === '2024') {
-                document.getElementById('success-dialog').style.display = 'block';
+        function typeMessage() {
+            if (currentIndex < botMessage.length) {
+                chatBotTextElement.textContent += botMessage[currentIndex];
+                currentIndex++;
+                setTimeout(typeMessage, 50); // Ajuste a velocidade de digitação aqui
             } else {
-                document.getElementById('error-dialog').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('error-dialog').style.display = 'none';
-                }, 2000);
+                buttonsContainer.style.display = 'flex'; // Exibe os botões após a mensagem ser digitada
             }
         }
 
-        function goToNextPage() {
-            window.location.href = 'painel.html';
-        }
-    </script>
+        setTimeout(typeMessage, 1000);
+    });
+</script>
+
 </body>
 </html>
