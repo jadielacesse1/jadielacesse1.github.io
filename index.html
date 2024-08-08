@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Login</title>
+    <title>SAITE JADIEL ACESSE PÁGINA DE LONGUIN</title>
     <style>
         body, html {
             margin: 0;
@@ -27,20 +27,20 @@
             z-index: -1;
         }
 
-        #login-container {
+        #welcome-message {
+            display: none;
             text-align: center;
             background-color: rgba(0, 0, 0, 0.5); /* Caixa de fundo transparente */
             padding: 20px;
             border-radius: 10px;
         }
 
-        #login-container.hidden {
+        #login-container {
             display: none;
-        }
-
-        #message {
-            display: none;
-            margin-bottom: 20px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5); /* Caixa de fundo transparente */
+            padding: 20px;
+            border-radius: 10px;
         }
 
         .input-field {
@@ -81,20 +81,27 @@
         Seu navegador não suporta a reprodução de vídeos.
     </video>
 
+    <div id="welcome-message">
+        <h2>Bem-vindo ao site!</h2>
+        <p>Aguarde um momento...</p>
+    </div>
+
     <div id="login-container">
-        <div id="message">Bem-vindo ao site! Por favor, insira suas credenciais.</div>
         <input id="username" class="input-field" type="text" placeholder="Usuário">
         <input id="password" class="input-field" type="password" placeholder="Senha">
-        <button class="login-btn" onclick="validateLogin()">Conectar</button>
+        <button class="login-btn" onclick="validateLogin()">CONECTAR</button>
         <img id="error-image" src="sua-imagem.png" alt="Erro">
     </div>
 
     <script>
+        function showLogin() {
+            document.getElementById('welcome-message').style.display = 'none';
+            document.getElementById('login-container').style.display = 'block';
+        }
+
         function botConversation() {
-            document.getElementById('message').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('login-container').classList.remove('hidden');
-            }, 3000);
+            document.getElementById('welcome-message').style.display = 'block';
+            setTimeout(showLogin, 3000); // Aguarda 3 segundos antes de mostrar o login
         }
 
         function validateLogin() {
