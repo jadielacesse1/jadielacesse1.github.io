@@ -3,178 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>site jadielacesse acesse página de longuin</title>
+    <title>Página de Login</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-image: url('https://raw.githubusercontent.com/jadielacesse1/jadielacesse1.github.io/main/fundo-de-particulas-de-tecnologia-realista_23-2148428033.jpg'); /* Link para a imagem de fundo */
-            background-size: cover; /* Faz a imagem cobrir toda a tela */
-            background-position: center; /* Centraliza a imagem */
-            background-repeat: no-repeat; /* Evita a repetição da imagem */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        body, html {
             margin: 0;
-        }
-        .chat-container {
-            width: 400px;
-            background-color: #000000;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            position: relative;
-        }
-        .bot-message {
-            background-color: #AD00C6;
-            color: #ffffff;
-            padding: 10px;
-            border-radius: 10px;
-            text-align: left;
-            word-wrap: break-word;
-            margin-bottom: 10px;
-            max-width: 100%;
-            align-self: flex-start;
-            display: flex;
-            align-items: center;
-        }
-        .bot-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 8px;
-            background-color: #000000;
-            color: #004d00;
-            border-radius: 50%;
+            padding: 0;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 18px;
+            background: #000;
+            color: white;
+            font-family: Arial, sans-serif;
         }
-        .buttons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+
+        #bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
         }
-        .buttons-container button {
-            padding: 15px; 
-            background-color: #AD00C6;
-            color: #ffffff; 
-            border: none;
-            cursor: pointer;
-            font-size: 18px; 
-            border-radius: 5px;
+
+        #login-container {
             text-align: center;
+            background-color: rgba(0, 0, 0, 0.5); /* Caixa de fundo transparente */
+            padding: 20px;
+            border-radius: 10px;
         }
-        .buttons-container button:hover {
-            background-color: #9200A8; /* Cor mais escura ao passar o mouse */
+
+        #login-container.hidden {
+            display: none;
         }
-        .input-group {
-            margin-bottom: 10px;
-            display: flex;
-            flex-direction: column;
-            width: 100%;
+
+        #message {
+            display: none;
+            margin-bottom: 20px;
         }
-        .input-group input {
+
+        .input-field {
+            margin: 10px 0;
             padding: 10px;
-            border: 1px solid #AD00C6; /* Borda roxa */
-            border-radius: 5px;
-            font-size: 16px;
-            background-color: #AD00C6; /* Cor de fundo dos campos em roxo */
-            color: #ffffff; /* Cor do texto */
-        }
-        .input-group input::placeholder {
-            color: #cccccc; /* Cor do placeholder */
-        }
-        .input-group button {
-            padding: 10px;
-            background-color: #AD00C6; /* Cor do botão em roxo */
-            color: #ffffff; /* Cor do texto do botão */
+            width: 80%;
+            max-width: 300px;
             border: none;
             border-radius: 5px;
-            font-size: 16px;
+        }
+
+        .login-btn, .link-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745; /* Cor verde */
+            color: white;
             cursor: pointer;
+            font-size: 16px;
         }
-        .input-group button:hover {
-            background-color: #9200A8; /* Cor mais escura ao passar o mouse */
+
+        .login-btn:hover, .link-btn:hover {
+            background-color: #218838;
         }
-        .error-image {
+
+        #error-image {
             display: none;
-            width: 100%;
+            max-width: 100%;
+            height: auto;
             margin-top: 20px;
-            border-radius: 10px;
         }
     </style>
 </head>
 <body>
+    <video id="bg-video" autoplay loop muted>
+        <source src="seu-video.mp4" type="video/mp4">
+        Seu navegador não suporta a reprodução de vídeos.
+    </video>
 
-<div class="chat-container">
-    <div id="bot-message" class="bot-message">
-        <div class="bot-icon">🤖</div>
-        <div id="chat-bot-text">...</div>
+    <div id="login-container">
+        <div id="message">Bem-vindo ao site! Por favor, insira suas credenciais.</div>
+        <input id="username" class="input-field" type="text" placeholder="Usuário">
+        <input id="password" class="input-field" type="password" placeholder="Senha">
+        <button class="login-btn" onclick="validateLogin()">Conectar</button>
+        <img id="error-image" src="sua-imagem.png" alt="Erro">
     </div>
-    <div id="input-container" class="input-group" style="display: none;">
-        <input type="text" id="username" placeholder="Usuário">
-        <input type="password" id="password" placeholder="Senha">
-        <button id="login-button">CONECTAR</button>
-    </div>
-    <div id="buttons-container" class="buttons-container" style="display: none;">
-        <button id="open-file-link-button">ENTRAR</button>
-    </div>
-    <img id="error-image" class="error-image" src="https://raw.githubusercontent.com/jadielacesse1/jadielacesse1.github.io/main/jadielacesse1.jpg" alt="Imagem de erro">
-</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const botMessage = "Olá,eu me chamo inteligência artificial trabalho no site jadielacesse,seja bem-vindo ao site Jadiel Acesse! Para ter acesso, basta adicionar as informações corretas abaixo.,Esse site foi criado por Jadiel.";        
-        const chatBotTextElement = document.getElementById('chat-bot-text');
-        const inputContainer = document.getElementById('input-container');
-        const buttonsContainer = document.getElementById('buttons-container');
-        const loginButton = document.getElementById('login-button');
-        const openFileLinkButton = document.getElementById('open-file-link-button');
-        const errorImage = document.getElementById('error-image');
-        
-        let currentIndex = 0;
-
-        function typeMessage() {
-            if (currentIndex < botMessage.length) {
-                chatBotTextElement.textContent += botMessage[currentIndex];
-                currentIndex++;
-                setTimeout(typeMessage, 50);
-            } else {
-                inputContainer.style.display = 'flex';
-            }
+    <script>
+        function botConversation() {
+            document.getElementById('message').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('login-container').classList.remove('hidden');
+            }, 3000);
         }
 
-        function validateCredentials() {
+        function validateLogin() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
             if (username === 'JADIEL' && password === '2024') {
-                chatBotTextElement.textContent = "Credenciais corretas! Clique no botão abaixo para acessar o conteúdo.";
-                buttonsContainer.style.display = 'flex';
-                openFileLinkButton.addEventListener('click', function() {
-                    window.open('painel.html', '_blank');
-                });
-                errorImage.style.display = 'none';
+                alert('Login bem-sucedido!');
+                window.location.href = 'link-para-sua-pagina.html';
             } else {
-                chatBotTextElement.textContent = "Usuário e/ou senha incorretos. Tente novamente.";
-                errorImage.style.display = 'block';
-                setTimeout(() => {
-                    chatBotTextElement.textContent = botMessage;
-                    typeMessage();
-                }, 2000);
+                document.getElementById('error-image').style.display = 'block';
             }
         }
 
-        setTimeout(typeMessage, 1000);
-
-        loginButton.addEventListener('click', validateCredentials);
-    });
-</script>
-
+        window.onload = botConversation;
+    </script>
 </body>
 </html>
