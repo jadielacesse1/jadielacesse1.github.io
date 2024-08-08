@@ -23,7 +23,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            position: relative; /* Adiciona o contexto para o posicionamento da imagem de erro */
+            position: relative;
         }
         .bot-message {
             background-color: #004d00;
@@ -52,23 +52,22 @@
         }
         .buttons-container {
             display: flex;
-            background-color: #009900;
             flex-direction: column;
             gap: 10px;
             width: 100%;
         }
         .buttons-container button {
-            padding: 15px; /* Aumenta o padding */
-            background-color: #00cc00; /* Cor verde */
-            color: #ffffff; /* Texto branco */
+            padding: 15px; 
+            background-color: #004d00; /* Cor verde escuro */
+            color: #ffffff; 
             border: none;
             cursor: pointer;
-            font-size: 18px; /* Aumenta o tamanho da fonte */
+            font-size: 18px; 
             border-radius: 5px;
-            text-align: center; /* Centraliza o texto */
+            text-align: center;
         }
         .buttons-container button:hover {
-            background-color: #009900; /* Cor verde mais escura ao passar o mouse */
+            background-color: #003300; /* Cor verde ainda mais escuro ao passar o mouse */
         }
         .input-group {
             margin-bottom: 10px;
@@ -78,12 +77,29 @@
         }
         .input-group input {
             padding: 10px;
-            border: 1px solid #cccccc;
+            border: 1px solid #004d00; /* Borda verde escuro */
             border-radius: 5px;
             font-size: 16px;
+            background-color: #003300; /* Cor de fundo dos campos em verde escuro */
+            color: #ffffff; /* Cor do texto */
+        }
+        .input-group input::placeholder {
+            color: #cccccc; /* Cor do placeholder */
+        }
+        .input-group button {
+            padding: 10px;
+            background-color: #004d00; /* Cor do botão em verde escuro */
+            color: #ffffff; /* Cor do texto do botão */
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .input-group button:hover {
+            background-color: #003300; /* Cor do botão ao passar o mouse, em verde ainda mais escuro */
         }
         .error-image {
-            display: none; /* Inicialmente oculta */
+            display: none;
             width: 100%;
             margin-top: 20px;
             border-radius: 10px;
@@ -105,7 +121,7 @@
     <div id="buttons-container" class="buttons-container" style="display: none;">
         <button id="open-file-link-button">Abrir Arquivo em Nova Aba</button>
     </div>
-    <img id="error-image" class="error-image" src="https://raw.githubusercontent.com/jadielacesse1/jadielacesse1.github.io/main/erro.jpg" alt="Imagem de erro"> <!-- Substitua o link da imagem -->
+    <img id="error-image" class="error-image" src="https://raw.githubusercontent.com/jadielacesse1/jadielacesse1.github.io/main/erro.jpg" alt="Imagem de erro">
 </div>
 
 <script>
@@ -124,9 +140,9 @@
             if (currentIndex < botMessage.length) {
                 chatBotTextElement.textContent += botMessage[currentIndex];
                 currentIndex++;
-                setTimeout(typeMessage, 50); // Ajuste a velocidade de digitação aqui
+                setTimeout(typeMessage, 50);
             } else {
-                inputContainer.style.display = 'flex'; // Exibe o formulário após a mensagem ser digitada
+                inputContainer.style.display = 'flex';
             }
         }
 
@@ -138,12 +154,12 @@
                 chatBotTextElement.textContent = "Credenciais corretas! Clique no botão abaixo para acessar o conteúdo.";
                 buttonsContainer.style.display = 'flex';
                 openFileLinkButton.addEventListener('click', function() {
-                    window.open('painel.html', '_blank'); // Abre o arquivo painel.html em uma nova aba
+                    window.open('painel.html', '_blank');
                 });
-                errorImage.style.display = 'none'; // Oculta a imagem de erro
+                errorImage.style.display = 'none';
             } else {
                 chatBotTextElement.textContent = "Usuário e/ou senha incorretos. Tente novamente.";
-                errorImage.style.display = 'block'; // Exibe a imagem de erro
+                errorImage.style.display = 'block';
                 setTimeout(() => {
                     chatBotTextElement.textContent = botMessage;
                     typeMessage();
