@@ -67,19 +67,34 @@
         .buttons-container button:hover {
             background-color: #006400;
         }
+        .input-group {
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .input-group input {
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
 
 <div class="chat-container">
-    <div class="bot-message">
+    <div id="bot-message" class="bot-message">
         <div class="bot-icon">🤖</div>
         <div id="chat-bot-text">...</div>
     </div>
+    <div id="input-container" class="input-group" style="display: none;">
+        <input type="text" id="username" placeholder="Usuário">
+        <input type="password" id="password" placeholder="Senha">
+        <button id="login-button">Entrar</button>
+    </div>
     <div id="buttons-container" class="buttons-container" style="display: none;">
-        <button>Usuário</button>
-        <button>Senha</button>
-        <button>Entrar</button>
+        <!-- Botões aparecerão após o login correto -->
     </div>
 </div>
 
@@ -87,8 +102,10 @@
     document.addEventListener('DOMContentLoaded', function() {
         const botMessage = "Olá, seja bem-vindo ao site Jadiel Acesse! Para ter acesso, basta adicionar as informações corretas abaixo.";
         const chatBotTextElement = document.getElementById('chat-bot-text');
+        const inputContainer = document.getElementById('input-container');
         const buttonsContainer = document.getElementById('buttons-container');
-
+        const loginButton = document.getElementById('login-button');
+        
         let currentIndex = 0;
 
         function typeMessage() {
@@ -97,9 +114,33 @@
                 currentIndex++;
                 setTimeout(typeMessage, 50); // Ajuste a velocidade de digitação aqui
             } else {
-                buttonsContainer.style.display = 'flex'; // Exibe os botões após a mensagem ser digitada
+                inputContainer.style.display = 'flex'; // Exibe o formulário após a mensagem ser digitada
             }
         }
+
+        function validateCredentials() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'JADIEL' && password === '2024') {
+                chatBotTextElement.textContent = "Credenciais corretas! Clique no botão abaixo para acessar o conteúdo.";
+                buttonsContainer.style.display = 'flex';
+                // Adiciona o botão "Abrir Arquivo" ao container
+                buttonsContainer.innerHTML = '<button onclick="openFile()">Abrir Arquivo</button>';
+            } else {
+                chatBotTextElement.textContent = "Usuário e/ou senha incorretos. Tente novamente.";
+                setTimeout(() => {
+                    chatBotTextElement.textContent = botMessage;
+                    typeMessage();
+                }, 2000);
+            }
+        }
+
+        function openFile() {
+            window.open('seu-arquivo.html', '_blank'); // Substitua 'seu-arquivo.html' pelo caminho do arquivo que deseja abrir
+        }
+
+        loginButton.addEventListener('click', validateCredentials);
 
         setTimeout(typeMessage, 1000);
     });
