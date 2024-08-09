@@ -3,113 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAITE JADIEL ACESSE PÁGINA DE LONGUIN</title>
+    <title>Encurtador de Links ShrinkMe.io</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+        body {
             font-family: Arial, sans-serif;
-            color: white;
-        }
-
-        #bg-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1; /* Vídeo deve ficar atrás dos outros elementos */
-        }
-
-        #welcome-message, #login-container {
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.5); /* Caixa de fundo transparente */
-            padding: 20px;
-            border-radius: 10px;
-            position: relative;
-            z-index: 1; /* Garantir que o conteúdo fique sobre o vídeo */
+            padding: 50px;
         }
 
-        .input-field {
-            margin: 10px 0;
+        input[type="url"] {
+            width: 300px;
             padding: 10px;
-            width: 80%;
-            max-width: 300px;
-            border: none;
-            border-radius: 5px;
+            margin: 10px 0;
         }
 
-        .login-btn {
-            margin-top: 10px;
+        input[type="submit"] {
             padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
             border: none;
             border-radius: 5px;
-            background-color: #28a745; /* Cor verde */
-            color: white;
             cursor: pointer;
-            font-size: 16px;
         }
 
-        .login-btn:hover {
-            background-color: #218838;
-        }
-
-        #error-image {
-            display: none;
-            max-width: 100%;
-            height: auto;
+        #resultado {
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <video id="bg-video" autoplay loop muted>
-        <source src="fundo.mp4" type="video/mp4">
-        Seu navegador não suporta a reprodução de vídeos.
-    </video>
-
-    <div id="welcome-message">
-        <h2>Bem-vindo ao site!</h2>
-        <p>Aguarde um momento...</p>
-    </div>
-
-    <div id="login-container" style="display: none;">
-        <input id="username" class="input-field" type="text" placeholder="Usuário">
-        <input id="password" class="input-field" type="password" placeholder="Senha">
-        <button class="login-btn" onclick="validateLogin()">CONECTAR</button>
-        <img id="error-image" src="sua-imagem.png" alt="Erro">
-    </div>
+    <h1>Encurtador de Links ShrinkMe.io</h1>
+    <form id="formEncurtador">
+        <input type="url" id="url" placeholder="Cole o link aqui" required>
+        <input type="submit" value="Encurtar">
+    </form>
+    <div id="resultado"></div>
 
     <script>
-        function showLogin() {
-            document.getElementById('welcome-message').style.display = 'none';
-            document.getElementById('login-container').style.display = 'block';
-        }
+        document.getElementById('formEncurtador').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const url = document.getElementById('url').value;
+            const apiKey = 'SUA_API_KEY';  // Substitua pela sua chave API do ShrinkMe.io
 
-        function botConversation() {
-            document.getElementById('welcome-message').style.display = 'block';
-            setTimeout(showLogin, 3000); // Aguarda 3 segundos antes de mostrar o login
-        }
-
-        function validateLogin() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (username === 'JADIEL' && password === '2024') {
-                alert('Login bem-sucedido!');
-                window.location.href = 'pagina-protegida.html'; // Redireciona para a página protegida
-            } else {
-                document.getElementById('error-image').style.display = 'block';
-            }
-        }
-
-        window.onload = botConversation;
+            fetch(`https://shrinkme.io/api?api=${apiKey}&url=${encodeURIComponent(url)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('resultado').innerHTML = `Link encurtado: <a href="${data.shortenedUrl}" target="_blank">${data.shortenedUrl}</a>`;
+                } else {
+                    document.getElementById('resultado').innerHTML = 'Erro ao encurtar o link: ' + data.message;
+                }
+            })
+            .catch(error => console.error('Erro:', error));
+        });
     </script>
 </body>
 </html>
