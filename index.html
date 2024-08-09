@@ -3,36 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encurtador de Links ShrinkMe.io</title>
+    <title>Encurtador de Links</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 50px;
         }
-
-        input[type="url"] {
-            width: 300px;
+        input[type="url"], input[type="submit"] {
             padding: 10px;
-            margin: 10px 0;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
-
         input[type="submit"] {
-            padding: 10px 20px;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
         }
-
         #resultado {
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Encurtador de Links ShrinkMe.io</h1>
+    <h1>Encurtador de Links</h1>
     <form id="formEncurtador">
         <input type="url" id="url" placeholder="Cole o link aqui" required>
         <input type="submit" value="Encurtar">
@@ -43,13 +39,20 @@
         document.getElementById('formEncurtador').addEventListener('submit', function(event) {
             event.preventDefault();
             const url = document.getElementById('url').value;
-            const apiKey = 'SUA_API_KEY';  // Substitua pela sua chave API do ShrinkMe.io
+            const token = 'b907874a0d7bdabfcc1ada4901bb6e';  // Seu token de API
 
-            fetch(`https://shrinkme.io/api?api=${apiKey}&url=${encodeURIComponent(url)}`)
+            fetch('https://suaurl.com/api/shorten', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ long_url: url })
+            })
             .then(response => response.json())
             .then(data => {
-                if (data.status === 'success') {
-                    document.getElementById('resultado').innerHTML = `Link encurtado: <a href="${data.shortenedUrl}" target="_blank">${data.shortenedUrl}</a>`;
+                if (data.success) {
+                    document.getElementById('resultado').innerHTML = `Link encurtado: <a href="${data.shortened_url}" target="_blank">${data.shortened_url}</a>`;
                 } else {
                     document.getElementById('resultado').innerHTML = 'Erro ao encurtar o link: ' + data.message;
                 }
