@@ -3,62 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encurtador de Links</title>
+    <title>Página Centralizada com Login Google</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
             text-align: center;
-            padding: 50px;
         }
-        input[type="url"], input[type="submit"] {
-            padding: 10px;
-            margin: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
+        .login-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4285F4;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
+            text-decoration: none;
         }
-        #resultado {
-            margin-top: 20px;
+        .login-button:hover {
+            background-color: #357ae8;
         }
     </style>
 </head>
 <body>
-    <h1>Encurtador de Links</h1>
-    <form id="formEncurtador">
-        <input type="url" id="url" placeholder="Cole o link aqui" required>
-        <input type="submit" value="Encurtar">
-    </form>
-    <div id="resultado"></div>
-
-    <script>
-        document.getElementById('formEncurtador').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const url = document.getElementById('url').value;
-            const token = 'b907874a0d7bdabfcc1ada4901bb6e';  // Seu token de API
-
-            fetch('https://suaurl.com/api/shorten', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({ long_url: url })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById('resultado').innerHTML = `Link encurtado: <a href="${data.shortened_url}" target="_blank">${data.shortened_url}</a>`;
-                } else {
-                    document.getElementById('resultado').innerHTML = 'Erro ao encurtar o link: ' + data.message;
-                }
-            })
-            .catch(error => console.error('Erro:', error));
-        });
-    </script>
+    <div class="container">
+        <h1>Bem-vindo!</h1>
+        <a href="https://accounts.google.com/signin" class="login-button">Login com Google</a>
+    </div>
 </body>
 </html>
